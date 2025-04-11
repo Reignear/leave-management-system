@@ -41,7 +41,7 @@ class GotoleaderLogin(QMainWindow):
 class GotomemberLogin(QMainWindow):
     def __init__(self, stacked_widget):
         super(GotomemberLogin, self).__init__()
-        self.stacked_widget = stacked_widget  # Initialize stacked_widget to None
+        self.stacked_widget = stacked_widget 
         loadUi("memberLoginPage.ui", self)
         self.setWindowTitle("Member Login")
         self.memberBackBTN.clicked.connect(self.openWelcomePage)

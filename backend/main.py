@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import *
-from welcome import WelcomePage
+from backend.welcome import WelcomePage
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
