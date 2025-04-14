@@ -48,7 +48,7 @@ class Ui_MemberMainWindow(object):
         self.memberNotificationBTN.setObjectName("memberNotificationBTN")
         self.memberLogoutBTN = QtWidgets.QPushButton(self.SideBarWidget)
         self.memberLogoutBTN.setGeometry(QtCore.QRect(10, 810, 301, 51))
-        self.memberLogoutBTN.setStyleSheet("QPushButton#logoutBTN{\n"
+        self.memberLogoutBTN.setStyleSheet("QPushButton#memberLogoutBTN{\n"
 " background-color: #FAA0A0;\n"
 "font: 10pt \"Arial\";\n"
 "}")
@@ -284,7 +284,7 @@ class Ui_MemberMainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.memberStackedWidget.setCurrentIndex(2)
+        self.memberStackedWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -333,13 +333,3 @@ class Ui_MemberMainWindow(object):
         self.label_29.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Confirm Password</span></p></body></html>"))
         self.settingsSaveBTN.setText(_translate("MainWindow", "Save"))
         self.settingsEditBTN.setText(_translate("MainWindow", "Edit"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MemberMainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

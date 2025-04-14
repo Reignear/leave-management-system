@@ -18,7 +18,6 @@ class MemberLoginPage(QtWidgets.QMainWindow):
         self.ui.MemberLoginBTN.clicked.connect(self.show_member_dashboard)
 
     def show_member_dashboard(self):
-        if not self.member_dashboard:
-            self.member_dashboard = MemberMainDashboard()
-        self.hide()
+        self.member_dashboard = MemberMainDashboard(self.welcome_page)
         self.member_dashboard.show()
+        self.hide()

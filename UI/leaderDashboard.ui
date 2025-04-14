@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1554</width>
-    <height>877</height>
+    <width>1560</width>
+    <height>881</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -183,7 +183,7 @@ font: 10pt &quot;Arial&quot;;
 }</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="dashboardPage">
      <widget class="QGroupBox" name="groupBox">
@@ -650,7 +650,7 @@ border-radius: 10px;
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;09075288220&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="viewEmployeeBTN">
          <property name="geometry">
           <rect>
            <x>70</x>
