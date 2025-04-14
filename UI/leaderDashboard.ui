@@ -42,7 +42,7 @@ background: qlineargradient(x1:0, y1:1, x2:0, y2:0,
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../OneDrive/Desktop/copy.png</pixmap>
+      <pixmap>../../../OneDrive/Desktop/copy.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -183,7 +183,7 @@ font: 10pt &quot;Arial&quot;;
 }</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="dashboardPage">
      <widget class="QGroupBox" name="groupBox">
@@ -408,7 +408,7 @@ border-radius: 10px;
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Recent Leave Request &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="leaveRequestTableNextBTN">
         <property name="geometry">
          <rect>
           <x>1060</x>
@@ -421,7 +421,7 @@ border-radius: 10px;
          <string>Next</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="leaveRequestTablePrevBTN">
         <property name="geometry">
          <rect>
           <x>950</x>
@@ -789,7 +789,7 @@ border-radius: 10px;
         </rect>
        </property>
       </widget>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="leaveRequestComboBox">
        <property name="geometry">
         <rect>
          <x>930</x>
@@ -797,6 +797,9 @@ border-radius: 10px;
          <width>271</width>
          <height>51</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 10pt &quot;Arial&quot;;</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="leaveRequestSearch">
@@ -810,8 +813,9 @@ border-radius: 10px;
        </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit#leaveRequestSearch{
- border-style: solid;
-    border-radius: 5px;
+border-style: solid;
+border-radius: 5px;
+font: 10pt &quot;Arial&quot;;
 
 }</string>
        </property>

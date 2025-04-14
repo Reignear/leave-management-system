@@ -45,7 +45,7 @@ background: qlineargradient(x1:0, y1:1, x2:0, y2:0,
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../OneDrive/Desktop/copy.png</pixmap>
+      <pixmap>../../../OneDrive/Desktop/copy.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -98,7 +98,7 @@ background-color: white;
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../../OneDrive/Desktop/user.png</pixmap>
+       <pixmap>../../../OneDrive/Desktop/user.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -155,7 +155,7 @@ background-color: white;
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../../OneDrive/Desktop/lock.png</pixmap>
+       <pixmap>../../../OneDrive/Desktop/lock.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -223,7 +223,7 @@ color: black
       </rect>
      </property>
      <property name="text">
-      <string/>
+      <string>Back</string>
      </property>
      <property name="icon">
       <iconset>

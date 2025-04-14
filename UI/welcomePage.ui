@@ -143,7 +143,7 @@ font: 10pt &quot;Arial&quot;;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../OneDrive/Desktop/copy.png</pixmap>
+      <pixmap>../assets/copy.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -180,7 +180,7 @@ font: 10pt &quot;Arial&quot;;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../OneDrive/Desktop/wow.jpg</pixmap>
+      <pixmap>../assets/wow.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
