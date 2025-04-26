@@ -21,4 +21,4 @@ if __name__ == "__main__":
     # Show the welcome page
     welcome_window.show()
 
-    sys.exit(app.exec_())
+sys.exit(app.exec_())
