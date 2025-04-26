@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets
 from UI.leaderLoginPage import Ui_leaderLoginWindow
-from leaderDashboardBackend import LeaderMainDashboard
+from backend.leaderDashboardBackend import LeaderMainDashboard
+
 
 class LeaderLoginPage(QtWidgets.QMainWindow):
     def __init__(self, welcome_page):

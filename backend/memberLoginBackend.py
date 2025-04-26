@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 from UI.memberLoginPage import Ui_memberLoginWindow
-from memberDashboardBackend import MemberMainDashboard
+from backend.memberDashboardBackend import MemberMainDashboard
 
 class MemberLoginPage(QtWidgets.QMainWindow):
     def __init__(self, welcome_page):

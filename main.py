@@ -1,8 +1,8 @@
 import sys
 from PyQt5 import QtWidgets
-from welcomeBackend import WelcomePage
-from leaderLoginBackend import LeaderLoginPage
-from memberLoginBackend import MemberLoginPage
+from backend.welcomeBackend import WelcomePage
+from backend.leaderLoginBackend import LeaderLoginPage
+from backend.memberLoginBackend import MemberLoginPage
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
