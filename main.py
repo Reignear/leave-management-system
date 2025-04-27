@@ -3,6 +3,7 @@ from PyQt5 import QtWidgets
 from backend.welcomeBackend import WelcomePage
 from backend.leaderLoginBackend import LeaderLoginPage
 from backend.memberLoginBackend import MemberLoginPage
+from PyQt5.QtGui import QFont
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

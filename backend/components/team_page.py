@@ -11,6 +11,7 @@ def show_add_employee(self):
     ui = self.Ui_AddEmployeeDialog()
     ui.setupUi(view_add_employee)
 
+    # Connect the Add button
     ui.addBTN.clicked.connect(lambda: self.save_new_employee(ui, view_add_employee))
 
     view_add_employee.setModal(True)
@@ -45,7 +46,7 @@ def save_new_employee(self, ui, dialog):
 
         QtWidgets.QMessageBox.information(self, "Success", "New employee added successfully.")
         dialog.accept()
-        self.populate_team_tab()
+
 
     except Exception as e:
         print(f"[ERROR] Failed to add employee: {e}")
@@ -59,7 +60,7 @@ def populate_team_tab(self):
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        query = "SELECT employee_id, firstname, middlename, lastname, email FROM Employee"
+        query = "SELECT employee_id, firstname, middlename, lastname, email, username FROM Employee"
         cursor.execute(query)
         employees = cursor.fetchall()
 
@@ -72,10 +73,9 @@ def populate_team_tab(self):
         row = 0
         col = 0
         for index, emp in enumerate(employees):
-            employee_id, firstname, middlename, lastname, email = emp
+            employee_id, firstname, middlename, lastname, email, username = emp
             full_name = f"{firstname} {middlename} {lastname}".replace("None", "").strip()
             first_letter = firstname[0].upper() if firstname else "?"
-
 
             team_card = QtWidgets.QGroupBox()
             team_card.setFixedSize(361, 291)
@@ -130,7 +130,7 @@ def populate_team_tab(self):
             phone_label = QtWidgets.QLabel(team_card)
             phone_label.setGeometry(QtCore.QRect(0, 200, 361, 20))
             phone_label.setAlignment(QtCore.Qt.AlignCenter)
-            phone_label.setText("Phone: N/A")
+            phone_label.setText(f"Username: {username}" if username else "No Username")
             phone_label.setStyleSheet("font-size: 10pt;")
 
             view_button = QtWidgets.QPushButton("View", team_card)
@@ -142,7 +142,7 @@ def populate_team_tab(self):
                 font-size: 10pt;
             """)
             view_button.clicked.connect(lambda checked, eid=employee_id: show_employee_dialog(self, eid))
-            
+
             self.teamGridLayout.addWidget(team_card, row, col)
 
             col += 1
@@ -156,35 +156,35 @@ def populate_team_tab(self):
     finally:
         cursor.close()
         conn.close()
-    def show_employee_details(self, employee_id):
-        try:
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            query = "SELECT * FROM Employee WHERE employee_id = %s"
-            cursor.execute(query, (employee_id,))
-            employee = cursor.fetchone()
 
-            if employee:
-                details = f"""
-                ID: {employee[0]}
-                Name: {employee[1]} {employee[2]} {employee[3]}
-                Suffix: {employee[4]}
-                Province: {employee[5]}
-                City: {employee[6]}
-                Barangay: {employee[7]}
-                Zip Code: {employee[8]}
-                Username: {employee[9]}
-                Email: {employee[10]}
-                """
+def show_employee_details(self, employee_id):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        query = "SELECT * FROM Employee WHERE employee_id = %s"
+        cursor.execute(query, (employee_id,))
+        employee = cursor.fetchone()
 
-                QtWidgets.QMessageBox.information(self, "Employee Details", details)
-            else:
-                QtWidgets.QMessageBox.warning(self, "Error", "Employee not found.")
+        if employee:
+            details = f"""
+ID: {employee[0]}
+Name: {employee[1]} {employee[2]} {employee[3]}
+Suffix: {employee[4]}
+Province: {employee[5]}
+City: {employee[6]}
+Barangay: {employee[7]}
+Zip Code: {employee[8]}
+Username: {employee[9]}
+Email: {employee[10]}
+"""
+            QtWidgets.QMessageBox.information(self, "Employee Details", details)
+        else:
+            QtWidgets.QMessageBox.warning(self, "Error", "Employee not found.")
 
-        except Exception as e:
-            print(f"[ERROR] Showing employee details: {e}")
-            QtWidgets.QMessageBox.critical(self, "Error", f"Failed to load details:\n{e}")
+    except Exception as e:
+        print(f"[ERROR] Showing employee details: {e}")
+        QtWidgets.QMessageBox.critical(self, "Error", f"Failed to load details:\n{e}")
 
-        finally:
-            cursor.close()
-            conn.close()
+    finally:
+        cursor.close()
+        conn.close()

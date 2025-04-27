@@ -27,6 +27,7 @@ class LeaderLoginPage(QtWidgets.QMainWindow):
             print("[LOGIN] Database login failed.")
             self.show_error_message("Invalid username or password.")
 
+
     def login_manager(self, username, password):
         try:
             print("[DB] Connecting to database...")
@@ -53,7 +54,10 @@ class LeaderLoginPage(QtWidgets.QMainWindow):
         self.leader_dashboard = LeaderMainDashboard(self.welcome_page)
         self.leader_dashboard.show()
         print("[DASHBOARD] Shown successfully")
+        from backend.components.dashboard_page import show_dashboard
+        show_dashboard(self.leader_dashboard)  
         self.hide()
+
 
     def show_error_message(self, message):
         QtWidgets.QMessageBox.critical(self, "Login Failed", message)
