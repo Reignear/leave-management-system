@@ -1,8 +1,9 @@
 import sys
 from PyQt5 import QtWidgets
-from welcomeBackend import WelcomePage
-from leaderLoginBackend import LeaderLoginPage
-from memberLoginBackend import MemberLoginPage
+from backend.welcomeBackend import WelcomePage
+from backend.leaderLoginBackend import LeaderLoginPage
+from backend.memberLoginBackend import MemberLoginPage
+from PyQt5.QtGui import QFont
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -21,4 +22,4 @@ if __name__ == "__main__":
     # Show the welcome page
     welcome_window.show()
 
-    sys.exit(app.exec_())
+sys.exit(app.exec_())

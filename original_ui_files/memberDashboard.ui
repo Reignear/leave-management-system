@@ -142,7 +142,7 @@ font: 10pt &quot;Arial&quot;;
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="memberDashboard">
      <widget class="QGroupBox" name="groupBox">
@@ -438,6 +438,21 @@ font: 10pt &quot;Arial&quot;;</string>
          <height>51</height>
         </rect>
        </property>
+       <item>
+        <property name="text">
+         <string>Sick Leave</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Casual Leave</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Paid Leave</string>
+        </property>
+       </item>
       </widget>
       <widget class="QLabel" name="label_6">
        <property name="geometry">
@@ -450,52 +465,6 @@ font: 10pt &quot;Arial&quot;;</string>
        </property>
        <property name="text">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Type of leave:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QDateEdit" name="leaveRequestFrom">
-       <property name="geometry">
-        <rect>
-         <x>650</x>
-         <y>390</y>
-         <width>261</width>
-         <height>51</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_7">
-       <property name="geometry">
-        <rect>
-         <x>650</x>
-         <y>340</y>
-         <width>181</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;From:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QDateEdit" name="leaveRequestTo">
-       <property name="geometry">
-        <rect>
-         <x>930</x>
-         <y>390</y>
-         <width>271</width>
-         <height>51</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_8">
-       <property name="geometry">
-        <rect>
-         <x>930</x>
-         <y>340</y>
-         <width>181</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;To:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QPlainTextEdit" name="leaveRequestReason">
@@ -534,6 +503,9 @@ font: 10pt &quot;Arial&quot;;</string>
          <height>51</height>
         </rect>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Submit&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">
 font: 10pt &quot;Arial&quot;;</string>
@@ -560,6 +532,19 @@ font: 10pt &quot;Arial&quot;;
        </property>
        <property name="text">
         <string>Clear</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>670</x>
+         <y>380</y>
+         <width>521</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Chosen Date: &lt;/span&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;November 18, 2002&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>

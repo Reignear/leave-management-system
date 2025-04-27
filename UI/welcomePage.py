@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from utils import get_asset
+
 
 
 class Ui_welcomeFrame(object):
@@ -56,7 +58,7 @@ class Ui_welcomeFrame(object):
         self.label_3 = QtWidgets.QLabel(self.leftWidget)
         self.label_3.setGeometry(QtCore.QRect(230, 60, 91, 101))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("../assets/copy.png"))
+        self.label_3.setPixmap(QtGui.QPixmap(get_asset("copy.png")))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.rightWidget = QtWidgets.QWidget(self.welcomeMainWidget)
@@ -71,7 +73,7 @@ class Ui_welcomeFrame(object):
         self.label_4 = QtWidgets.QLabel(self.rightWidget)
         self.label_4.setGeometry(QtCore.QRect(0, 0, 571, 561))
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("../assets/wow.jpg"))
+        self.label_4.setPixmap(QtGui.QPixmap(get_asset("wow.jpg")))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
 
