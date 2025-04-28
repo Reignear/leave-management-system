@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from utils import get_asset
 
 class Ui_memberLoginWindow(object):
     def setupUi(self, MainWindow):
@@ -28,7 +28,7 @@ class Ui_memberLoginWindow(object):
         self.label_3 = QtWidgets.QLabel(self.loginMainWidget)
         self.label_3.setGeometry(QtCore.QRect(480, 60, 91, 101))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("../../../OneDrive/Desktop/copy.png"))
+        self.label_3.setPixmap(QtGui.QPixmap(get_asset("copy.png")))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.groupBox = QtWidgets.QGroupBox(self.loginMainWidget)
@@ -46,7 +46,7 @@ class Ui_memberLoginWindow(object):
         self.label_4 = QtWidgets.QLabel(self.groupBox)
         self.label_4.setGeometry(QtCore.QRect(30, 10, 31, 31))
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("../../../OneDrive/Desktop/user.png"))
+        self.label_4.setPixmap(QtGui.QPixmap(get_asset("user.png")))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
         self.groupBox2 = QtWidgets.QGroupBox(self.loginMainWidget)
@@ -64,7 +64,7 @@ class Ui_memberLoginWindow(object):
         self.label_5 = QtWidgets.QLabel(self.groupBox2)
         self.label_5.setGeometry(QtCore.QRect(30, 10, 31, 31))
         self.label_5.setText("")
-        self.label_5.setPixmap(QtGui.QPixmap("../../../OneDrive/Desktop/lock.png"))
+        self.label_5.setPixmap(QtGui.QPixmap(get_asset("lock.png")))
         self.label_5.setScaledContents(True)
         self.label_5.setObjectName("label_5")
         self.MemberLoginBTN = QtWidgets.QPushButton(self.loginMainWidget)
