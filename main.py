@@ -1,25 +1,27 @@
 import sys
 from PyQt5 import QtWidgets
+from PyQt5.QtGui import QFont
+
 from backend.welcomeBackend import WelcomePage
 from backend.leaderLoginBackend import LeaderLoginPage
 from backend.memberLoginBackend import MemberLoginPage
-from PyQt5.QtGui import QFont
 
-if __name__ == "__main__":
+def main():
     app = QtWidgets.QApplication(sys.argv)
 
-    # initialize welcome page
+    # Initialize welcome page and login windows
     welcome_window = WelcomePage()
-
-    # Create login pages
     leader_login_window = LeaderLoginPage(welcome_window)
     member_login_window = MemberLoginPage(welcome_window)
 
-    # References the logins
+    # Cross-reference login pages with the welcome page
     welcome_window.leader_login_window = leader_login_window
     welcome_window.member_login_window = member_login_window
 
     # Show the welcome page
     welcome_window.show()
 
-sys.exit(app.exec_())
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()

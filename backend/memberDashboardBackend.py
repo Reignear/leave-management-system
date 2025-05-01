@@ -46,7 +46,10 @@ class MemberMainDashboard(QtWidgets.QMainWindow):
 
     def update_dashboard(self):
         full_name = f"{self.employee_data['firstname']} {self.employee_data['middlename']} {self.employee_data['lastname']}".strip()
-        self.ui.dashboardUser.setText(f"<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">{full_name}</span></p></body></html>")
+        from bridge.rust_bridge import get_welcome_message
+
+        greeting = get_welcome_message(full_name)
+        self.ui.dashboardUser.setText(f"<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">{greeting}</span></p></body></html>")
 
         self.ui.dashboardSickLeaveLabel.setText(f"<html><head/><body><p align=\"center\"><span style=\" font-size:48pt; font-weight:600;\">{self.employee_data['sick_leaves']}</span></p></body></html>")
         self.ui.dashboardCasualLeaveLabel.setText(f"<html><head/><body><p align=\"center\"><span style=\" font-size:48pt; font-weight:600;\">{self.employee_data['casual_leaves']}</span></p></body></html>")
