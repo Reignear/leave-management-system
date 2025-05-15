@@ -1,14 +1,12 @@
-#leaderDashboardBackend.py
+# leaderDashboardBackend.py
 from PyQt5 import QtWidgets, QtCore
 from UI.leaderDashboard import Ui_LeaderMainWindow
-from backend.components.team_page import populate_team_tab
 from backend.components.leave_request_page import LeaveRequestPage
 from backend.components.employee_dialog import show_employee_dialog, show_remove_confirmation
 from backend.components.add_employee_dialog_Backend import show_add_employee, save_new_employee
 from utils import get_db_connection
 from backend.components.dashboard_page import show_dashboard
-from backend.components.team_page import show_team
-from backend.components.attendance_page import show_attendance
+from backend.components.team_page import show_team, populate_team_tab, filter_team_list, show_employee_details, show_add_employee
 from backend.components.calendar_leave_page import show_calendar_leave
 from backend.components.leave_request_page import show_leave_request
 
@@ -24,16 +22,18 @@ class LeaderMainDashboard(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.dashboardStackedWidget.setCurrentWidget(self.ui.dashboardPage)
 
+        # Connect the team search input text change to filter function
+        self.ui.teamSearchInput.textChanged.connect(lambda text: filter_team_list(self, text))
+
+        # Setup the scroll area and team layout container
         self.teamScrollArea = QtWidgets.QScrollArea(self.ui.teamPage)
         self.teamScrollArea.setGeometry(QtCore.QRect(30, 180, 1161, 651))
         self.teamScrollArea.setWidgetResizable(True)
         self.teamScrollArea.setStyleSheet("border: none;")
 
-        # Inside the scroll area, create a container
         self.teamScrollContent = QtWidgets.QWidget()
         self.teamScrollArea.setWidget(self.teamScrollContent)
 
-        # Inside the container, create a groupbox
         self.teamGridGroupBox = QtWidgets.QGroupBox(self.teamScrollContent)
         self.teamGridGroupBox.setStyleSheet("""
         QGroupBox {
@@ -42,40 +42,35 @@ class LeaderMainDashboard(QtWidgets.QMainWindow):
             border: 2px solid black;
         }
         """)
-
-        # Set layout
         self.teamGridLayout = QtWidgets.QGridLayout(self.teamGridGroupBox)
         self.teamGridGroupBox.setLayout(self.teamGridLayout)
 
-        # Make the grid fill the container
         layout = QtWidgets.QVBoxLayout(self.teamScrollContent)
         layout.addWidget(self.teamGridGroupBox)
-
 
         self.welcome_window = welcome_window
 
         # Connect Navigation Buttons
         self.ui.dashboardBTN.clicked.connect(lambda: show_dashboard(self))
         self.ui.teamBTN.clicked.connect(lambda: show_team(self))
-        self.ui.attendanceBTN.clicked.connect(lambda: show_attendance(self))
         self.ui.calendarLeaveBTN.clicked.connect(lambda: show_calendar_leave(self))
         self.ui.leaveRequestBTN.clicked.connect(lambda: show_leave_request(self))
 
-        # View Employee Dialog
+        # View Employee Dialog button
         self.ui.viewEmployeeBTN.clicked.connect(lambda: show_employee_dialog(self))
 
-        # Add Employee Dialog
+        # Add Employee Dialog button
         self.ui.teamAddBTN.clicked.connect(lambda: show_add_employee(self, self.populate_team_tab))
 
         # Logout
         self.ui.logoutBTN.clicked.connect(self.leader_logout_process)
 
-        # Populate Team at startup
+        # Populate team list at startup
         self.populate_team_tab()
 
-    def populate_team_tab(self):
-        from backend.components.team_page import populate_team_tab
-        populate_team_tab(self)
+    def populate_team_tab(self, keyword=""):
+        # Forward call to the team_page's populate_team_tab function
+        populate_team_tab(self, keyword)
 
     def show_employee_details(self, employee_id):
         try:

@@ -3,7 +3,7 @@ from UI.viewEmployeeDialog import Ui_EmployeeDialog
 from UI.removeConfirmationDialog import Ui_removeConfirmationDialog
 from utils import get_db_connection
 
-def show_employee_dialog(parent, employee_id):
+def show_employee_dialog(parent, employee_id, populate_team_callback):
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -41,7 +41,7 @@ def show_employee_dialog(parent, employee_id):
             ui.label_14.setStyleSheet(enlarged_font_style)
 
             # Connect the Remove Button (pass employee_id)
-            ui.removeEmployeeBTN.clicked.connect(lambda: show_remove_confirmation(view_employee_dialog, employee_id))
+            ui.removeEmployeeBTN.clicked.connect(lambda: show_remove_confirmation(view_employee_dialog, employee_id, populate_team_callback))
 
             view_employee_dialog.setModal(True)
             view_employee_dialog.exec_()
@@ -56,7 +56,7 @@ def show_employee_dialog(parent, employee_id):
         cursor.close()
         conn.close()
 
-def show_remove_confirmation(parent, employee_id):
+def show_remove_confirmation(parent, employee_id, populate_team_callback):
     view_remove_confirmation = QtWidgets.QDialog(parent)
     ui = Ui_removeConfirmationDialog()
     ui.setupUi(view_remove_confirmation)
@@ -65,12 +65,12 @@ def show_remove_confirmation(parent, employee_id):
     ui.confirmationCancelBTN.clicked.connect(view_remove_confirmation.reject)
 
     # When Remove is clicked
-    ui.confirmationRemoveBTN.clicked.connect(lambda: attempt_remove_employee(ui, view_remove_confirmation, parent, employee_id))
+    ui.confirmationRemoveBTN.clicked.connect(lambda: attempt_remove_employee(ui, view_remove_confirmation, parent, employee_id, populate_team_callback))
 
     view_remove_confirmation.setModal(True)
     view_remove_confirmation.exec_()
 
-def attempt_remove_employee(ui, confirmation_dialog, parent, employee_id):
+def attempt_remove_employee(ui, confirmation_dialog, parent, employee_id, populate_team_callback):
     password_entered = ui.confirmationLineEdit.text().strip()
 
     try:
@@ -104,3 +104,4 @@ def attempt_remove_employee(ui, confirmation_dialog, parent, employee_id):
     finally:
         cursor.close()
         conn.close()
+        populate_team_callback()

@@ -5,6 +5,8 @@ from PyQt5 import QtWidgets, QtCore
 
 def show_team(self):
     self.ui.dashboardStackedWidget.setCurrentWidget(self.ui.teamPage)
+    # Optional: trigger search with a preset keyword (can remove or comment)
+    # self.ui.teamSearchInput.setText("Batangas")
 
 def show_add_employee(self):
     view_add_employee = QtWidgets.QDialog(self)
@@ -47,7 +49,6 @@ def save_new_employee(self, ui, dialog):
         QtWidgets.QMessageBox.information(self, "Success", "New employee added successfully.")
         dialog.accept()
 
-
     except Exception as e:
         print(f"[ERROR] Failed to add employee: {e}")
         QtWidgets.QMessageBox.critical(self, "Error", f"Failed to add employee:\n{e}")
@@ -56,25 +57,46 @@ def save_new_employee(self, ui, dialog):
         cursor.close()
         conn.close()
 
-def populate_team_tab(self):
+def populate_team_tab(self, keyword=""):
     try:
         conn = get_db_connection()
-        cursor = conn.cursor()
-        query = "SELECT employee_id, firstname, middlename, lastname, email, username FROM Employee"
-        cursor.execute(query)
+        cursor = conn.cursor(dictionary=True)
+
+        if keyword:
+            query = """
+                SELECT * FROM Employee 
+                WHERE 
+                    firstname LIKE %s OR
+                    middlename LIKE %s OR
+                    lastname LIKE %s OR
+                    province LIKE %s OR
+                    city LIKE %s OR
+                    zipcode LIKE %s
+            """
+            like = f"%{keyword}%"
+            cursor.execute(query, (like,)*6)
+        else:
+            query = "SELECT * FROM Employee"
+            cursor.execute(query)
+
         employees = cursor.fetchall()
 
         # Clear previous widgets
         for i in reversed(range(self.teamGridLayout.count())):
-            widget_to_remove = self.teamGridLayout.itemAt(i).widget()
-            self.teamGridLayout.removeWidget(widget_to_remove)
-            widget_to_remove.setParent(None)
+            widget = self.teamGridLayout.itemAt(i).widget()
+            self.teamGridLayout.removeWidget(widget)
+            widget.setParent(None)
 
-        row = 0
-        col = 0
-        for index, emp in enumerate(employees):
-            employee_id, firstname, middlename, lastname, email, username = emp
-            full_name = f"{firstname} {middlename} {lastname}".replace("None", "").strip()
+        row, col = 0, 0
+        for emp in employees:
+            employee_id = emp['employee_id']
+            firstname = emp['firstname'] or ""
+            middlename = emp['middlename'] or ""
+            lastname = emp['lastname'] or ""
+            email = emp['email'] or "No Email"
+            username = emp['username'] or "No Username"
+
+            full_name = f"{firstname} {middlename} {lastname}".strip()
             first_letter = firstname[0].upper() if firstname else "?"
 
             team_card = QtWidgets.QGroupBox()
@@ -124,13 +146,13 @@ def populate_team_tab(self):
             email_label = QtWidgets.QLabel(team_card)
             email_label.setGeometry(QtCore.QRect(0, 170, 361, 20))
             email_label.setAlignment(QtCore.Qt.AlignCenter)
-            email_label.setText(email if email else "No Email")
+            email_label.setText(email)
             email_label.setStyleSheet("font-size: 10pt;")
 
             phone_label = QtWidgets.QLabel(team_card)
             phone_label.setGeometry(QtCore.QRect(0, 200, 361, 20))
             phone_label.setAlignment(QtCore.Qt.AlignCenter)
-            phone_label.setText(f"Username: {username}" if username else "No Username")
+            phone_label.setText(f"Username: {username}")
             phone_label.setStyleSheet("font-size: 10pt;")
 
             view_button = QtWidgets.QPushButton("View", team_card)
@@ -141,10 +163,9 @@ def populate_team_tab(self):
                 border-radius: 10px;
                 font-size: 10pt;
             """)
-            view_button.clicked.connect(lambda checked, eid=employee_id: show_employee_dialog(self, eid))
+            view_button.clicked.connect(lambda checked, eid=employee_id: show_employee_dialog(self, eid, self.populate_team_tab))
 
             self.teamGridLayout.addWidget(team_card, row, col)
-
             col += 1
             if col >= 3:
                 col = 0
@@ -156,6 +177,11 @@ def populate_team_tab(self):
     finally:
         cursor.close()
         conn.close()
+
+def filter_team_list(self, keyword):
+    # Debug print, remove if you want silent operation
+    print(f"[DEBUG] Filtering with keyword: {keyword}")
+    self.populate_team_tab(keyword=keyword)
 
 def show_employee_details(self, employee_id):
     try:
