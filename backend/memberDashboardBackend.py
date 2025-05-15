@@ -10,6 +10,8 @@ class MemberMainDashboard(QtWidgets.QMainWindow):
         super().__init__()
         self.ui = Ui_MemberMainWindow()
         self.ui.setupUi(self)
+        self.load_leave_calendar_highlight()
+
 
         self.welcome_window = welcome_window
         self.employee_data = employee_data
@@ -331,3 +333,33 @@ class MemberMainDashboard(QtWidgets.QMainWindow):
                 conn.close()
             except:
                 pass
+
+    def load_leave_calendar_highlight(self):
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor(dictionary=True)
+
+            query = """
+                SELECT date 
+                FROM LeaveApplication 
+                WHERE status = 'approved'
+            """
+            cursor.execute(query)
+            results = cursor.fetchall()
+
+            # Red highlight format
+            format = QtGui.QTextCharFormat()
+            format.setBackground(QtGui.QBrush(QtGui.QColor("red")))
+            format.setForeground(QtGui.QBrush(QtGui.QColor("white")))
+            format.setFontWeight(QtGui.QFont.Bold)
+
+            for entry in results:
+                date = entry['date']
+                date_obj = QtCore.QDate(date.year, date.month, date.day)
+                self.ui.leaveRequestCalendar.setDateTextFormat(date_obj, format)
+
+            cursor.close()
+            conn.close()
+
+        except Exception as e:
+            print(f"[ERROR] Loading calendar highlights: {e}")
